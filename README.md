@@ -32,6 +32,7 @@ parce que :
 
 Pour mélanger les tâches, il est possible de se faire un fichier excel 
 Exemple :
+~~~~
 +---+---+-------+--------+---------+----+---+
 |new|old|av     | name   | milieux |cond|ap |
 +---+---+-------+--------+---------+----+---+
@@ -39,5 +40,6 @@ Exemple :
 |   | 2 |{name:"|action 2|", cond:"|1   |"},|
 |   | 3 |{name:"|action 3|", cond:"|2   |"},|
 +---+---+-------+--------+---------+----+---+
+~~~~
 
 et de jouer avec les filtres et tris pour mélanger puis réajuster les conditions en fonction des nouvelles positions.
