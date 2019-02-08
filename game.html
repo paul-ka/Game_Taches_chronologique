@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+	
+<head>
+	<meta charset="utf-8">
+	<title>Prendre la tension</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+    table {
+        text-align:center
+    }
+    td{
+        width: 100vh;
+    }
+    td div{
+        border : 2px solid white;
+        background-color : #DDDDFF;
+        padding : 5px;
+        border-radius : 5px;
+        
+    }
+    .th, h1{
+        border : 2px solid white;
+        background-color : #AAAADD;
+        padding : 5px;
+        border-radius : 5px;
+        
+    }
+	</style>
+    <script src="data.js"></script>
+</head>
+<body>
+    <h1>titre</h1>
+    <p>Consigne</p>
+    <table>
+        <tr>
+            <td class="th">possible</td>
+            <td class="th">fait</td>
+        </tr>
+        <tr>
+            <td id="possible"></td>
+            <td id="fait"></td>
+        </tr>
+    </table>
+    <p id="chrono"></p>
+    <script>
+        console.dir(mydata[1]);
+        var regex = RegExp('[0-9]+');
+        var possible = document.getElementById("possible");
+        var fait = document.getElementById("fait");
+        var flagStart = 0;
+        var start;
+        for(var action in mydata){
+            if (action > 0){                              //saute la 1? ligne pour compter ?parir de 1
+                cree(action,"possible")
+            }
+        }
+        function place(no, col){
+            if(flagStart == 0){
+                start = new Date();
+                flagStart = 1;
+            }
+            if((col == "fait")&&(mydata[no].cond !="0")){ //délacement vers colonne fait et condition différente de 0
+            	var antecedent = mydata[no].cond.split(',');
+                var flagOk = true;
+            	for(var condition in antecedent){
+	                if(mydata[antecedent[condition]].col != "fait"){ //passe de possible à fait
+                        flagOk = false
+	                }
+
+           
+            	}
+                if(flagOk == true){ //passe de possible à fait
+                    //supprime l'ancien élément dans la colonne possible
+                    nodes = document.getElementById("possible").children
+                    for (node in nodes){
+                        if (regex.test(node)){
+                            if(nodes[node].dataset.index == no){
+                                nodes[node].parentNode.removeChild(nodes[node]);
+                            }
+                        }
+                    }
+                    cree(no, col)
+                }else{
+                    alert("Il manque une condition")
+                }
+            }
+            
+            if((col == "fait")&&(mydata[no].cond == "0")){ //d?lacement vers colonne fait et condition = 0
+                //supprime l'ancien ??ent dans la colonne possible
+                nodes = document.getElementById("possible").children
+                for (node in nodes){
+                    if (regex.test(node)){
+                        if(nodes[node].dataset.index == no){
+                            nodes[node].parentNode.removeChild(nodes[node]);
+                        }
+                    }
+                }
+                cree(no, col)
+            }
+
+
+            if(col == "possible"){ //d?lacement vers colonne possible
+                nodes = document.getElementById("fait").children
+                for (node in nodes){
+                    if (regex.test(node)){
+                        if(nodes[node].dataset.index == no){
+                            nodes[node].parentNode.removeChild(nodes[node]);
+                        }
+                    }
+                }
+                cree(no, col)
+            }
+            if(document.getElementById("possible").childElementCount == 0){
+                var end = new Date();
+                document.getElementById("chrono").innerHTML = "vous avez mis "+ Math.trunc((end - start)/1000)+ " secondes."
+            }
+        }
+
+        function cree(no, col){
+            var carte = document.createElement("div");
+            dest=(col=="possible")?"fait":"possible"
+            carte.innerHTML = mydata[no].name;
+            mydata[no].col=col;
+            carte.setAttribute("onclick", "place("+no+",'"+dest+"')");
+            carte.setAttribute("data-index", no);
+            if(col=="possible"){
+                possible.appendChild(carte);            
+            }else{
+                fait.appendChild(carte);            
+            }
+        }
+    </script>
+</body>
+</html>
