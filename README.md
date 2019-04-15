@@ -15,9 +15,9 @@ Exemple :
 var mydata=[
         {name:"base"},
         {name:"action 1", cond:"0"},
-        {name:"action 2", cond:"1"},
-        {name:"action 3", cond:"1"},
-        {name:"action 4", cond:"2,3"}
+        {name:"action 2", cond:"1", fb:"Feedback action 2"},
+        {name:"action 3", cond:"1", fb:"Feedback action 3"},
+        {name:"action 4", cond:"2,3", fb:"Feedback action 4"}
     ];
  ~~~~
  
@@ -33,13 +33,13 @@ parce que :
 Pour mélanger les tâches, il est possible de se faire un fichier excel 
 Exemple :
 ~~~~
-+---+---+-------+--------+---------+----+---+
-|new|old|av     | name   | milieux |cond|ap |
-+---+---+-------+--------+---------+----+---+
-|   | 1 |{name:"|action 1|", cond:"|0   |"},|
-|   | 2 |{name:"|action 2|", cond:"|1   |"},|
-|   | 3 |{name:"|action 3|", cond:"|2   |"},|
-+---+---+-------+--------+---------+----+---+
++---+---+-------+--------+---------+----+-------+----------+---+
+|new|old|av     | name   | milieux |cond| Separ | feedback |ap |
++---+---+-------+--------+---------+----+-------+----------+---+
+|   | 1 |{name:"|action 1|", cond:"|0   |", fb:"|feedback 1|"},|
+|   | 2 |{name:"|action 2|", cond:"|1   |", fb:"|feedback 2|"},|
+|   | 3 |{name:"|action 3|", cond:"|2   |", fb:"|feedback 3|"},|
++---+---+-------+--------+---------+----+-------+----------+---+
 ~~~~
 
 et de jouer avec les filtres et tris pour mélanger puis réajuster les conditions en fonction des nouvelles positions.
