@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<title>Prendre la tension</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>     
+    <!--Utilisation de sweetAlerte pour avoir une belle modale : https://sweetalert.js.org-->
 	<style type="text/css">
     table {
         text-align:center
@@ -82,7 +84,7 @@
                     }
                     cree(no, col)
                 }else{
-                    alert("Il manque une condition")
+                    swal(mydata[no].fb,"Il manque une action...",  "warning")        //affiche le feedBack dans une modale
                 }
             }
             
